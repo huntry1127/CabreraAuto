@@ -7,5 +7,6 @@ const url=new URL(studioUrl);if(url.protocol!=='https:' || url.username || url.p
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const publicDir=existsSync(resolve(root,'dist/index.html'))?'dist':'.';
 writeFileSync(resolve(root,publicDir,'inventory-config.js'),'// Public connection details. No API tokens belong in this file.\nwindow.CABRERA_INVENTORY_CONFIG = '+JSON.stringify({projectId,dataset,apiVersion:'2026-10-05',studioUrl:url.href},null,2)+';\n');
-writeFileSync(resolve(root,'studio/.env.local'),`SANITY_STUDIO_PROJECT_ID=${projectId}\nSANITY_STUDIO_DATASET=${dataset}\n`);
+const studioDir=existsSync(resolve(root,'../studio-cabrera-auto-services/sanity.config.js'))?resolve(root,'../studio-cabrera-auto-services'):resolve(root,'studio-cabrera-auto-services');
+writeFileSync(resolve(studioDir,'.env.local'),`SANITY_STUDIO_PROJECT_ID=${projectId}\nSANITY_STUDIO_DATASET=${dataset}\n`);
 console.log('Configured the website and Studio. Deploy Studio, verify a test listing, then publish the website changes.');

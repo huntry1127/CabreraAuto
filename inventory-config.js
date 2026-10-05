@@ -1,8 +1,8 @@
-// Public connection details only. Never place an API token here.
-// Fill these in after creating the owner-controlled Sanity project.
+// Public connection details. No API token is required.
 window.CABRERA_INVENTORY_CONFIG = {
-  projectId: '',
-  dataset: 'production',
-  apiVersion: '2026-10-05',
-  studioUrl: ''
+  "projectId": "sla6i9i4",
+  "dataset": "production",
+  "apiVersion": "2026-10-05",
+  "editorReady": false,
+  "studioUrl": "https://cabrera-inventory-editor.huntry1127.chatgpt.site"
 };

@@ -1,7 +1,7 @@
 import {defineConfig} from 'sanity';
 import {structureTool} from 'sanity/structure';
 import vehicle from './schemaTypes/vehicle.js';
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'sla6i9i4';
 if (!projectId) throw new Error('Set SANITY_STUDIO_PROJECT_ID in studio/.env.local to connect the owner’s Sanity project.');
 export default defineConfig({
   name: 'cabrera-inventory', title: 'Cabrera · Vehicle inventory',
