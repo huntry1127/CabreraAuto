@@ -10,13 +10,13 @@ The local Studio lives in `/workspace/sites/studio-cabrera-auto-services`, next 
 
 The source is also mirrored under `studio-cabrera-auto-services/` in this GitHub repository as a standalone package. Run `npm ci` and `npm run build` inside that folder. The public project ID is included in its config; no API tokens are shipped. Sanity enforces login and project-member edit permissions. Hosted editor access is currently private to Ryan; owner access and invitation will be configured later.
 
-## Remaining permission
+## Editor access
 
-The website origin is added to Sanity CORS without credentials. The editor origin needs Allow credentials enabled in Sanity’s API > CORS origins settings before authenticated editing can work. This is pending confirmation. Do not mark setup complete until the editor successfully signs in and saves.
+The website origin is added to Sanity CORS without credentials. The editor origin is added with Allow credentials enabled, with user confirmation. Both hosted sites remain private to Ryan. The editor requires ChatGPT access first, then Sanity member authentication.
 
 ## Finish and verify
 
-1. Add the deployed editor origin to CORS with credentials, after confirmation.
+1. Open the private editor and sign in with the authorized ChatGPT account.
 2. Sign in to the editor with the Sanity account that owns this project.
 3. Create a clearly identified test-only vehicle, upload a photo, set Available and Publish. Verify it on the autos page, change the price and verify it after refresh, then mark Sold and Publish. Verify it is excluded. Test data must never be presented as actual stock.
 4. Deploy the schema with `npx sanity schemas deploy` from the standalone Studio when CLI authentication is available, for Sanity MCP schema discovery. Browser sign-in does not authenticate the CLI. Editing through the Studio uses its registered local schema.
@@ -28,4 +28,4 @@ Open Owner inventory and the editor. Create a Vehicle, enter the year, make, mod
 
 ## Checks
 
-`node --test tests/inventory-source.test.cjs` tests published-only normalization, malformed data, configuration, fetch options, and network errors. The standalone Studio build passes. Live authenticated publishing and uploads are pending the editor permission and sign-in check.
+`node --test tests/inventory-source.test.cjs` tests published-only normalization, malformed data, configuration, fetch options, and network errors. The standalone Studio build passes. Live authenticated publishing and uploads still require the private editor login smoke test. CORS permission is enabled; no invitations have been sent.
