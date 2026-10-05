@@ -1,0 +1,11 @@
+import {writeFileSync,existsSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {resolve,dirname} from 'node:path';
+const [projectId,studioUrl,dataset='production']=process.argv.slice(2);
+if(!/^[a-z0-9]+$/.test(projectId||'') || !/^[a-z0-9_-]+$/.test(dataset))throw new Error('Usage: node scripts/connect-inventory.mjs PROJECT_ID HTTPS_STUDIO_URL [DATASET]');
+const url=new URL(studioUrl);if(url.protocol!=='https:' || url.username || url.password)throw new Error('Use the deployed Studio HTTPS URL.');
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const publicDir=existsSync(resolve(root,'dist/index.html'))?'dist':'.';
+writeFileSync(resolve(root,publicDir,'inventory-config.js'),'// Public connection details. No API tokens belong in this file.\nwindow.CABRERA_INVENTORY_CONFIG = '+JSON.stringify({projectId,dataset,apiVersion:'2026-10-05',studioUrl:url.href},null,2)+';\n');
+writeFileSync(resolve(root,'studio/.env.local'),`SANITY_STUDIO_PROJECT_ID=${projectId}\nSANITY_STUDIO_DATASET=${dataset}\n`);
+console.log('Configured the website and Studio. Deploy Studio, verify a test listing, then publish the website changes.');

@@ -19,7 +19,7 @@
   window.CABRERA_FILTER_INVENTORY = filterInventory;
   const grid = document.querySelector('#vehicle-grid');
   if (!grid) return;
-  const inventory = (window.CABRERA_INVENTORY || []).filter(v => v && v.id && v.year && v.make && v.model);
+  let inventory = [];
   const filters = document.querySelector('#inventory-filters');
   const body = document.querySelector('#vehicle-body');
   const search = document.querySelector('#vehicle-search');
@@ -70,11 +70,32 @@
     document.querySelector('#inventory-empty').hidden=inventory.length>0;
     document.querySelector('#inventory-no-matches').hidden=inventory.length===0||results.length>0;
   }
-  if(inventory.length){filters.hidden=false;[...new Set(inventory.map(v=>v.body).filter(Boolean))].sort().forEach(value=>{const option=el('option',value);option.value=value;body.append(option);});}
+
   filters.addEventListener('submit',event=>event.preventDefault());[search,body,budget,sort].forEach(input=>input.addEventListener('input',render));
   document.querySelector('#reset-filters').addEventListener('click',()=>{filters.reset();render();search.focus();});
   document.querySelector('.vehicle-dialog-close').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('close',()=>document.body.classList.remove('dialog-open'));
   dialog.addEventListener('click',event=>{if(event.target===dialog){const b=dialog.getBoundingClientRect();if(event.clientX<b.left||event.clientX>b.right||event.clientY<b.top||event.clientY>b.bottom)dialog.close();}});
-  render();
+  async function refreshInventory() {
+    const state = document.querySelector('#inventory-load-state');
+    const retry = document.querySelector('#inventory-retry');
+    state.hidden=false; state.textContent='Loading current vehicles…'; retry.hidden=true;
+    document.querySelector('#inventory-empty').hidden=true;
+    document.querySelector('#inventory-no-matches').hidden=true;
+    document.querySelector('#inventory-count').textContent='Checking availability…';
+    filters.hidden=true; grid.replaceChildren();
+    try {
+      const result = await window.CABRERA_INVENTORY_SOURCE.load();
+      inventory = result.vehicles.filter(v => v && v.id && v.year && v.make && v.model);
+      body.replaceChildren(el('option','All body types')); body.options[0].value='';
+      [...new Set(inventory.map(v=>v.body).filter(Boolean))].sort().forEach(value=>{const option=el('option',value);option.value=value;body.append(option);});
+      filters.hidden=!inventory.length; state.hidden=true; render();
+    } catch (error) {
+      inventory=[]; document.querySelector('#inventory-count').textContent='Listings unavailable';
+      state.textContent='We couldn’t load current listings. Try again or call the shop for availability.';
+      retry.hidden=false;
+    }
+  }
+  document.querySelector('#inventory-retry').addEventListener('click',refreshInventory);
+  refreshInventory();
 })();
