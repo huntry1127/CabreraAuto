@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  const query = '*[_type == "vehicle" && status == "available" && !(_id in path("drafts.**"))] | order(_updatedAt desc) {"id": _id, status, year, make, model, trim, price, mileage, body, transmission, fuel, exterior, description, features, "images": photos[].asset->url}';
+  const query = '*[_type == "vehicle" && status == "available" && !(_id in path("drafts.**"))] | order(_createdAt desc, _id asc) {"id": _id, "createdAt": _createdAt, status, year, make, model, trim, price, mileage, body, transmission, fuel, exterior, description, features, "images": photos[].asset->url}';
   function normalize(vehicles) {
     if (!Array.isArray(vehicles)) throw new Error('Invalid inventory response');
     return vehicles.filter(v => v && typeof v.id==='string' && !v.id.startsWith('drafts.') && v.status==='available' && Number.isInteger(v.year) && v.year>=1900 && typeof v.make==='string' && v.make.trim() && typeof v.model==='string' && v.model.trim()).map(v=>({

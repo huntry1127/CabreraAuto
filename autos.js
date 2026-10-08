@@ -90,6 +90,9 @@
       body.replaceChildren(el('option','All body types')); body.options[0].value='';
       [...new Set(inventory.map(v=>v.body).filter(Boolean))].sort().forEach(value=>{const option=el('option',value);option.value=value;body.append(option);});
       filters.hidden=!inventory.length; state.hidden=true; render();
+      const requestedId = new URLSearchParams(window.location.search).get('vehicle');
+      const requestedVehicle = inventory.find(v => v.id === requestedId);
+      if (requestedVehicle) showVehicle(requestedVehicle);
     } catch (error) {
       inventory=[]; document.querySelector('#inventory-count').textContent='Listings unavailable';
       state.textContent='We couldn’t load current listings. Try again or call the shop for availability.';
