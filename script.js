@@ -9,6 +9,6 @@ window.matchMedia('(min-width: 761px)').addEventListener('change', closeMenu);
 document.querySelector('#year').textContent = new Date().getFullYear();
 const appointmentDialog = document.querySelector('#appointment-dialog');
 document.querySelectorAll('.appointment').forEach(button => button.addEventListener('click', () => { closeMenu(); appointmentDialog.showModal(); document.body.classList.add('dialog-open'); }));
-document.querySelector('.dialog-close').addEventListener('click', () => appointmentDialog.close());
+appointmentDialog.querySelector('.dialog-close').addEventListener('click', () => appointmentDialog.close());
 appointmentDialog.addEventListener('close', () => document.body.classList.remove('dialog-open'));
 appointmentDialog.addEventListener('click', event => { if (event.target === appointmentDialog) { const box = appointmentDialog.getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) appointmentDialog.close(); } });

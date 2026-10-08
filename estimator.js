@@ -37,6 +37,10 @@
   serviceSelect.addEventListener('change', () => { setDefaults(); invalidate(); });
   form.addEventListener('input', invalidate);
   form.addEventListener('change', invalidate);
+  form.addEventListener('invalid', event => {
+    const assumptions = event.target.closest('.estimate-assumptions');
+    if (assumptions) assumptions.open = true;
+  }, true);
   form.addEventListener('submit', event => {
     event.preventDefault(); error.hidden = true;
     if (!form.reportValidity()) return;
@@ -64,6 +68,6 @@
       if (window.matchMedia('(max-width: 760px)').matches) result.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
     } catch (e) { error.textContent = e.message; error.hidden = false; error.focus(); }
   });
-  document.querySelector('#new-estimate').addEventListener('click', () => { form.reset(); setDefaults(); invalidate(); yearSelect.focus(); form.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  document.querySelector('#new-estimate').addEventListener('click', () => { form.reset(); setDefaults(); invalidate(); yearSelect.focus(); form.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); });
   setDefaults();
 })();
