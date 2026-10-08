@@ -21,4 +21,7 @@ Primary domain: https://cabreraautoservices.com/
 Cars currently load from Sanity in the browser and detail views use a dialog. The inventory page is the canonical search page; individual cars do not yet have independently indexable detail pages. A future improvement is public vehicle pages with HTML descriptions and matching titles, updated automatically when inventory changes. Do not add inaccurate vehicle Product, price, or review markup.
 
 ## Hosting
-GitHub Pages uses the repository-root CNAME with cabreraautoservices.com. Preserve it on future updates, keep HTTPS enforced, and retain Sanity CORS access for the apex and www domain. The private ChatGPT Site remains a separate publication with canonical metadata referring to the public domain.
+GitHub Pages uses the repository-root CNAME with cabreraautoservices.com. Preserve it on future updates, keep HTTPS enforced, and retain Sanity CORS access for the apex and www domain. The ChatGPT Site remains a separate publication with canonical metadata referring to the public domain.
+
+## Local search focus
+Belmont Cragin and Chicago’s West Side appear naturally in homepage copy, metadata, the location section, a service-area FAQ, inventory copy and structured areaServed data. The shop location remains Belmont Cragin; West Side describes the drivers served, not a second address. No separate neighborhood doorway pages or unverified local claims are added.
