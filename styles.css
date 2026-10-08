@@ -19,3 +19,6 @@
 
 /* Preserve the full storefront photograph at every screen size. */
 .hero-storefront>img{height:auto;aspect-ratio:1983 / 793;object-fit:contain;object-position:center}
+
+/* Center the second row of the five service cards. */
+@media(min-width:761px){.service-cards{display:flex;flex-wrap:wrap;justify-content:center;gap:24px}.service-cards>article{flex:0 0 calc((100% - 48px)/3);min-width:0}}
