@@ -54,7 +54,7 @@ test('estimator submit, edit, validation and reset preserve correct state',()=>{
   const {form,nodes}=estimator();const fields=form.elements;
   fields.service.value='struts';fields.service.emit('change');fields.year.value='2008';fields.make.value='BMW';fields.model.value='535xi';
   for(const key of ['laborRate','partsLow','partsHigh','hoursLow','hoursHigh'])fields[key].value=String(fields[key].value);
-  form.emit('submit');assert.equal(nodes['#estimate-result'].hidden,false);assert.equal(nodes['#estimate-total'].textContent,'$480 – $1,080');assert.equal(nodes['#estimate-vehicle'].textContent,'2008 BMW 535xi');assert.equal(nodes['#estimate-result'].scrolled.behavior,'auto');
+  form.emit('submit');assert.equal(nodes['#estimate-result'].hidden,false);assert.equal(nodes['#estimate-total'].textContent,'$540 – $1,200');assert.equal(nodes['#estimate-vehicle'].textContent,'2008 BMW 535xi');assert.equal(nodes['#estimate-result'].scrolled.behavior,'auto');
   form.emit('input');assert.equal(nodes['#estimate-result'].hidden,true);
   fields.partsHigh.value='1';form.emit('submit');assert.equal(nodes['#estimate-error'].hidden,false);
   const assumptions={open:false};form.emit('invalid',{target:{closest:()=>assumptions}});assert.equal(assumptions.open,true);

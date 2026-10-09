@@ -2,7 +2,7 @@
 // prices or a vehicle-specific repair database. Replace with approved shop data.
 window.CABRERA_ESTIMATOR_CONFIG = {
   pricingMode: 'sample',
-  laborRate: 120,
+  laborRate: 150,
   services: [
     { id: 'oil', name: 'Oil & filter change', parts: [35, 80], hours: [0.3, 0.6], scope: 'Oil and one filter. Oil type, quantity, and filter specification must be confirmed.' },
     { id: 'brake-pads', name: 'Brake pads — one axle', parts: [65, 160], hours: [1, 1.8], scope: 'One axle of brake pads. Rotors, calipers, brake fluid, and additional repairs are excluded.' },
