@@ -29,3 +29,6 @@
 /* Keep small-screen controls readable and touch targets easy to reach. */
 .custom-estimator-grid>*,.latest-inventory-grid>*,.latest-car-feature>*,.inventory-filters>*{min-width:0}
 @media(max-width:760px){.estimate-assumptions .form-grid input{font-size:16px}.menu-toggle{min-height:44px}nav>a{min-height:44px}.mobile-contact a,.mobile-contact button{min-height:44px}}
+
+/* Stock service photography shares the existing responsive card frames. */
+.service-image>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.service-image>span{z-index:1}.brakes>img{object-position:center 45%}.suspension>img{object-position:60% 40%}.general-repair>img{object-position:65% 45%}.engine-diagnostics>img{object-position:center 60%}
