@@ -58,8 +58,10 @@
   }
   function card(v) {
     const article=el('article',undefined,'vehicle-card');const images=safeImages(v);
-    if(images.length){const image=el('img',undefined,'vehicle-photo');image.src=images[0];image.alt=title(v);image.loading='lazy';article.append(image);}
-    else article.append(el('div','Photos coming soon','vehicle-photo vehicle-photo-empty'));
+    const photoButton=el('button',undefined,'vehicle-photo-button');photoButton.type='button';photoButton.setAttribute('aria-label','View details for '+title(v));photoButton.setAttribute('aria-haspopup','dialog');photoButton.setAttribute('aria-controls','vehicle-dialog');photoButton.addEventListener('click',()=>showVehicle(v));
+    if(images.length){const image=el('img',undefined,'vehicle-photo');image.src=images[0];image.alt='';image.loading='lazy';photoButton.append(image);}
+    else photoButton.append(el('div','Photos coming soon','vehicle-photo vehicle-photo-empty'));
+    article.append(photoButton);
     const content=el('div',undefined,'vehicle-card-content');content.append(el('h3',title(v)));if(v.trim)content.append(el('p',v.trim,'vehicle-trim'));
     content.append(el('p',priceLabel(v),'vehicle-price'));const meta=[];if(Number.isFinite(v.mileage))meta.push(v.mileage.toLocaleString()+' miles');if(v.body)meta.push(v.body);content.append(el('p',meta.join(' · '),'vehicle-meta'));
     const button=el('button','View vehicle details →','button outline-dark');button.type='button';button.addEventListener('click',()=>showVehicle(v));content.append(button);article.append(content);return article;

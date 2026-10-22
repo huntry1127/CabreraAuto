@@ -32,3 +32,6 @@
 
 /* Stock service photography shares the existing responsive card frames. */
 .service-image>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.service-image>span{z-index:1}.brakes>img{object-position:center 45%}.suspension>img{object-position:60% 40%}.general-repair>img{object-position:65% 45%}.engine-diagnostics>img{object-position:center 60%}
+
+/* Listing photos open the same accessible vehicle details dialog. */
+.vehicle-photo-button{display:block;width:100%;padding:0;border:0;background:#e7edf1;text-align:inherit;cursor:pointer}.vehicle-photo-button:focus-visible{outline:3px solid var(--green);outline-offset:-3px}

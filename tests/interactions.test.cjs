@@ -78,6 +78,8 @@ test('inventory deep link opens the requested car and photos switch correctly',a
   assert.equal(nodes['#vehicle-dialog'].open,true);assert.equal(nodes['#inventory-count'].textContent,'1 vehicle listed');assert.equal(nodes['#vehicle-grid'].children.length,1);
   const [photo,thumbs]=nodes['#vehicle-detail-content'].children;thumbs.children[1].emit('click');assert.equal(photo.src,car.images[1]);
   nodes['.vehicle-dialog-close'].emit('click');assert.equal(nodes['#vehicle-dialog'].open,false);assert.equal(body.classList.contains('dialog-open'),false);
+  const card=nodes['#vehicle-grid'].children[0];card.children[0].emit('click');assert.equal(nodes['#vehicle-dialog'].open,true);assert.equal(nodes['#vehicle-detail-content'].children[2].textContent,'2020 Toyota Camry');
+  nodes['.vehicle-dialog-close'].emit('click');card.children[1].children.at(-1).emit('click');assert.equal(nodes['#vehicle-dialog'].open,true);nodes['.vehicle-dialog-close'].emit('click');
   nodes['#vehicle-search'].value='missing';nodes['#vehicle-search'].emit('input');assert.equal(nodes['#inventory-no-matches'].hidden,false);
   fails=true;nodes['#inventory-retry'].emit('click');await new Promise(resolve=>setImmediate(resolve));assert.equal(nodes['#inventory-retry'].hidden,false);assert.equal(nodes['#vehicle-grid'].children.length,0);
   fails=false;nodes['#vehicle-search'].value='';nodes['#inventory-retry'].emit('click');await new Promise(resolve=>setImmediate(resolve));assert.equal(nodes['#inventory-retry'].hidden,true);assert.equal(nodes['#vehicle-grid'].children.length,1);
