@@ -35,3 +35,7 @@
 
 /* Listing photos open the same accessible vehicle details dialog. */
 .vehicle-photo-button{display:block;width:100%;padding:0;border:0;background:#e7edf1;text-align:inherit;cursor:pointer}.vehicle-photo-button:focus-visible{outline:3px solid var(--green);outline-offset:-3px}
+
+/* Visible social link on both public pages. */
+.topbar .wrap{align-items:center;gap:6px 16px;flex-wrap:wrap}.topbar-links{display:flex;align-items:center;gap:16px;margin-left:auto}.social-link{display:inline-flex;align-items:center;gap:6px;min-height:30px;color:inherit;font-weight:600}.social-link svg{display:block;flex-shrink:0}.social-link:hover span{text-decoration:underline}.topbar .social-link:focus-visible{outline:2px solid white;outline-offset:2px}
+@media(max-width:480px){.topbar .wrap{gap:0;padding:5px 0}.topbar .wrap>span{flex-basis:100%}.topbar-links{width:100%;margin:0;justify-content:space-between;gap:12px}.topbar .social-link{min-height:32px;font-size:10px}}
